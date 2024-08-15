@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16.4-alpine
+    container_name: ts-webapi-template-db
+    volumes:
+      - ts-webapi-template-db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports: 
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB'"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    profiles:
+      - full
+      - api
+      - ""
+
+  webapi:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: ts-webapi-template-webapi
+    environment:
+      - PORT=${WEBAPI_HTTP_PORT}
+    ports: 
+      - ${WEBAPI_HTTP_PORT}:${WEBAPI_HTTP_PORT}
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - full
+      - api
+
+volumes:
+  ts-webapi-template-db: {}
