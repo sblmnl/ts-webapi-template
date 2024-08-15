@@ -1,7 +1,11 @@
 import { app, config, logger } from "@/app.js";
-import { pingDb } from "./infrastructure/db/connection.js";
+import { db, pingDb } from "./infra/db/conn.js";
 
 await pingDb();
+
+if (config.environment === "dev") {
+  await db.migrate.latest();
+}
 
 const server = app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}!`);

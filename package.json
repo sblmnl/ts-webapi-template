@@ -4,9 +4,16 @@
     "dev": "nodemon --ignore ./tests/ --exec tsx ./src/index.ts",
     "lint": "biome check ./src/ ./tests/",
     "lint:fix": "biome check --fix ./src/ ./tests/",
-    "build": "tsup --format esm ./src/"
+    "build": "tsup --format esm ./src/",
+    "knex:run": "node --import tsx ./node_modules/.bin/knex --knexfile ./src/infra/db/config.ts",
+    "db:migrate:make": "npm run knex:run -- migrate:make",
+    "db:migrate": "npm run knex:run -- migrate:latest",
+    "db:migrate:up": "npm run knex:run -- migrate:up",
+    "db:migrate:rollback": "npm run knex:run -- migrate:rollback",
+    "db:migrate:down": "npm run knex:run -- migrate:down"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "knex": "^3.1.0",
     "pg": "^8.12.0",
