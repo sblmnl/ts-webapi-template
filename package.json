@@ -4,7 +4,8 @@
     "dev": "nodemon --ignore ./tests/ --exec tsx ./src/main.ts"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "tslog": "^4.9.3"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.5",

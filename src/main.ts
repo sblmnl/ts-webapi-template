@@ -1,13 +1,13 @@
-import { app, config } from "@/app.js";
+import { app, config, logger } from "@/app.js";
 
 const server = app.listen(config.port, () => {
-  console.log(`Server started on port ${config.port}!`);
+  logger.info(`Server started on port ${config.port}!`);
 });
 
 const onExitSignal = () => {
-  console.info("Exit signal received, shutting down...");
+  logger.info("Exit signal received, shutting down...");
   server.close(() => {
-    console.info("Server stopped!");
+    logger.info("Server stopped!");
     process.exit();
   });
   setTimeout(() => process.exit(1), 10000).unref();
