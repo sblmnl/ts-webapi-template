@@ -1,5 +1,5 @@
-import knex from "knex";
 import { config } from "@/app.js";
+import knex from "knex";
 
 export const db = knex({ client: "pg", connection: config.dbConnectionString });
 

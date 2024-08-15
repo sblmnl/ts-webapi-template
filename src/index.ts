@@ -9,7 +9,7 @@ const server = app.listen(config.port, () => {
 
 const onExitSignal = () => {
   logger.info("Stopping server...");
-  
+
   server.close(() => {
     logger.info("Server stopped!");
     process.exit();
