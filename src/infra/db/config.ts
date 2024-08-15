@@ -1,7 +1,8 @@
+import fs from "node:fs";
 import { config as appConfig } from "@/app.js";
 import type { Knex } from "knex";
 
-const baseDir = appConfig.environment === "dev" ? "./src" : ".";
+const baseDir = fs.existsSync("./src") ? "./src" : ".";
 
 const dbConfig: Knex.Config = {
   client: "pg",

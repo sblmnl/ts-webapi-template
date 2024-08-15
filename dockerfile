@@ -11,5 +11,7 @@ COPY --from=builder --chown=node:node /home/node/node_modules ./node_modules
 COPY --from=builder --chown=node:node /home/node/package.json ./package.json
 
 RUN npm prune --omit=dev
-EXPOSE 8080
+
+EXPOSE 5000
+
 CMD ["sh","-c","node ."]
