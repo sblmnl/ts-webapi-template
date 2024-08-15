@@ -26,9 +26,10 @@ services:
       dockerfile: dockerfile
     container_name: ts-webapi-template-webapi
     environment:
-      - PORT=${WEBAPI_HTTP_PORT}
-    ports: 
-      - ${WEBAPI_HTTP_PORT}:${WEBAPI_HTTP_PORT}
+      - PORT=5000
+      - DB_CONNECTION_STRING=postgresql://${DB_USER}:${DB_PASSWORD}@db/${DB_NAME}
+    ports:
+      - 5000:5000
     depends_on:
       db:
         condition: service_healthy

@@ -12,4 +12,4 @@ COPY --from=builder --chown=node:node /home/node/package.json ./package.json
 
 RUN npm prune --omit=dev
 EXPOSE 8080
-CMD ["sh","-c","node ./index.cjs"]
+CMD ["sh","-c","node ."]
